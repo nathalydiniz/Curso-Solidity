@@ -22,6 +22,19 @@ contract Aluguel
 }
     function valorAtualDoAluguel () public view returns (uint256) {
         return valor;
+     }
+     
+    function simulaMulta ( uint256 mesesRestantes,
+                     uint256 totalMesesContato)   
+    public
+    view
+    returns (uint256 valorMulta) {
         
+        valorMulta = valor*2;
+        valorMulta = valorMulta/totalMesesContato;
+        valorMulta = valorMulta*mesesRestantes;
     }
+}
+    
+    
     }
