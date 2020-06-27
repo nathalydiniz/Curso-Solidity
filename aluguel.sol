@@ -9,17 +9,17 @@ contract Aluguel
     uint256 constant numeroMaximoLegaldeAlugueisParaMulta = 3;
     
     constructor (
-        string memory paramlocador,
-        string memory paramlocatario,
+        string memory nomeLocador,
+        string memory nomeLocatario,
         uint256 valorDoAluguel
         )
     public
     {
-        locador = paramlocador;
-        locatario = paramlocatario;
+        locador = nomeLocador;
+        locatario = nomeLocatario;
         valor = valorDoAluguel;
     }
-}
+
     function valorAtualDoAluguel () public view returns (uint256) {
         return valor;
      }
@@ -35,6 +35,3 @@ contract Aluguel
         valorMulta = valorMulta*mesesRestantes;
     }
 }
-    
-    
-    }
