@@ -1,0 +1,30 @@
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity 0.6.10;
+
+contract CustodiaDeCriptomoeda
+{
+    string public custodiante;
+    string public cliente;
+    uint256 public valor;
+    uint256 private valorRendimentoDiario;
+    
+    constructor (
+        string memory nomeCustodiante,
+        string memory nomeCliente,
+        uint256 valorAporte
+        )
+    public
+    {
+        custodiante = nomeCustodiante;
+        cliente = nomeCliente;
+        valorRendimentoDiario = valorAporte/250;
+    }
+
+    function simulaMulta ( uint256 diasAtrasoLiberacaoSaque)   
+    public
+    view
+    returns(uint256 valorMulta){
+            
+        valorMulta = ((valorRendimentoDiario/2)*diasAtrasoLiberacaoSaque);
+        }
+}
