@@ -3,11 +3,11 @@ pragma solidity 0.6.10;
 
 contract CustodiaDeCriptomoeda
 {
-    string public custodiante;
-    string public cliente;
-    uint256 public valor;
+    string public custodiante; // Empresa custodiante de criptpoativos
+    string public cliente; // Investidor de criptpoativos
+    uint256 public valor;  //Numerário investido pelo Cliente em criptpoativos na Custodiante
     uint256 private valorRendimentoDiario;
-    
+
     constructor (
         string memory nomeCustodiante,
         string memory nomeCliente,
@@ -27,4 +27,12 @@ contract CustodiaDeCriptomoeda
             
         valorMulta = ((valorRendimentoDiario/2)*diasAtrasoLiberacaoSaque);
         }
+    
+    function acrescimoDeRendimento (uint256 valorAporte) public {
+    
+    if (valorAporte > 10000) {
+        valorRendimentoDiario = valorAporte/200;
+    } 
+    
+    }
 }
