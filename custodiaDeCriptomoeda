@@ -25,11 +25,12 @@ contract CustodiaDeCriptomoeda
         valorMulta = ((valorRendimentoDiario/2)*diasAtrasoLiberacaoSaque);
     }
     
-    function acrescimoDeRendimento (uint256 valorAporte) public 
-    {
-        if (valorAporte > 10000) 
-        {
-        valorRendimentoDiario = valorAporte/200;
-        } 
+     function acrescimoDeRendimento (uint256 valorAporte) public {
+    
+        if (valorAporte >= 10000 && valorAporte < 50000) {
+            valorRendimentoDiario = valorAporte/200;
+        } else if (valorAporte > 50000) {
+            valorRendimentoDiario = valorAporte/180;
+        }  
     }
 }
