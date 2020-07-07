@@ -6,43 +6,36 @@ pragma solidity 0.6.10;
 
 contract BillOfLanding {
     
-    uint public valueCargo;
+    uint public cargo;
+    string public importer;
+    string public exporter;
+    string public carrier;
+    string public PortLoading;
+    string public PortDischarge;
+
+    constructor (
+        string memory nameImporter, 
+        string memory nameExporter, 
+        string memory nameCarrier, 
+        string memory namePortLoading, 
+        string memory namePortDischarge,
+        address payable walletImporter,
+        address payable walletExporter,
+        address payable walletCarrier,
+        uint cargo,
+        uint dateDischarge
+        ) public {
+            importer = nameImporter;
+            exporter = nameExporter;
+            carrier = nameCarrier;
+            PortLoading = namePortLoading;
+            PortDischarge = namePortDischarge;
+            cargo = valueCargo;
+            uint dateLoading = now;
+            uint _lateDays;
+            }
     
-    struct importer {
-        string nameImporter;
-        address payable walletImporter;
-    }
-    
-    struct exporter {
-        string nameExporter;
-        address payable walletExporter;    
-    }
-    
-    struct carrier {
-        string nameCarrier;
-        address payable walletCarrier;
-    }
-    
-    struct loading {
-        string namePort;
-        uint dateLoading;
-    }
-    
-    struct discharge {
-        string namePort;
-        uint dateDischarge;
-    }
-    
-    address payable public walletImporter;
-    
-    address payable public walletExporter;
-    
-    address payable public walletCarrier;
-    
-    constructor () public {
-        uint _dateDischarge;
-        uint dateLoading = now;
-        uint _lateDays;
+    function conteiner (uint numberSerial, string memory contentDescription, uint weight, uint volume) public {
     }
     
     function paymentCargo (uint valueCargo, address payable walletExporter) public payable {
@@ -50,9 +43,9 @@ contract BillOfLanding {
     }
     
     // Demurrage, ou sobrestadia, é a indenização diária, devida ao transportador, quando o importador permanece em posse do contêiner por um período superior ao tempo acordado.
-    function simulaDemurrage (uint lateDays, uint priceDemurrage) public {
-        priceDemurrage = ((valueCargo * 2) / 100) * lateDays;
-        
+    function simulaDemurrage (uint _lateDays) public view returns (uint priceDemurrage) {
+        priceDemurrage = ((valueCargo*2)/100)*_lateDays;
+        return priceDemurrage;
     }
     
     function paymentDemurrage (uint _lateDays, uint priceDemurrage, address payable walletCarrier) public payable {
@@ -63,6 +56,5 @@ contract BillOfLanding {
     //A responsabilidade pela contratação do seguro é estabelecida entre as partes no contrato comercial de compra e venda da carga e utiliza-se os INCOTERMS
     //(International Commercial Terms – Câmara Internacional do Comércio) para definir qual será a parte que suportará os riscos do transporte marítimo.
     function store(string memory incoterms) public {
-        
-    }    
+            }    
 }
