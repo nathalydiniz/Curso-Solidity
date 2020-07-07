@@ -6,7 +6,7 @@ pragma solidity 0.6.10;
 
 contract BillOfLanding {
     
-    uint public cargo;
+    uint public valueCargoargo;
     string public importer;
     string public exporter;
     string public carrier;
@@ -22,7 +22,7 @@ contract BillOfLanding {
         address payable walletImporter,
         address payable walletExporter,
         address payable walletCarrier,
-        uint cargo,
+        uint valueCargo,
         uint dateDischarge
         ) public {
             importer = nameImporter;
@@ -30,7 +30,6 @@ contract BillOfLanding {
             carrier = nameCarrier;
             PortLoading = namePortLoading;
             PortDischarge = namePortDischarge;
-            cargo = valueCargo;
             uint dateLoading = now;
             uint _lateDays;
             }
@@ -43,7 +42,7 @@ contract BillOfLanding {
     }
     
     // Demurrage, ou sobrestadia, é a indenização diária, devida ao transportador, quando o importador permanece em posse do contêiner por um período superior ao tempo acordado.
-    function simulaDemurrage (uint _lateDays) public view returns (uint priceDemurrage) {
+    function simulaDemurrage (uint _lateDays, uint valueCargo) public view returns (uint priceDemurrage) {
         priceDemurrage = ((valueCargo*2)/100)*_lateDays;
         return priceDemurrage;
     }
@@ -56,5 +55,7 @@ contract BillOfLanding {
     //A responsabilidade pela contratação do seguro é estabelecida entre as partes no contrato comercial de compra e venda da carga e utiliza-se os INCOTERMS
     //(International Commercial Terms – Câmara Internacional do Comércio) para definir qual será a parte que suportará os riscos do transporte marítimo.
     function store(string memory incoterms) public {
-            }    
+    
+        
+    }    
 }
