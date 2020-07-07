@@ -1,0 +1,10 @@
+ //
+    function warningRevenue (address payable walletRevenue, string memory nameCarrier, uint dateLoading) public payable {
+        require (dateLoading >= now, "Tax owed");
+        
+        nameCarrier = msg.sender;
+    
+    emit warningRevenue (msg.sender);
+    }
+    
+}
