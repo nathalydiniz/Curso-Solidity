@@ -6,43 +6,49 @@ pragma solidity 0.6.10;
 
 contract BillOfLanding {
     
-    uint public valueCargoargo;
-    string public importer;
-    string public exporter;
-    string public carrier;
-    string public PortLoading;
-    string public PortDischarge;
-
-    constructor (
-        string memory nameImporter, 
-        string memory nameExporter, 
-        string memory nameCarrier, 
-        string memory namePortLoading, 
-        string memory namePortDischarge,
-        address payable walletImporter,
-        address payable walletExporter,
-        address payable walletCarrier,
-        uint valueCargo,
-        uint dateDischarge
-        ) public {
-            importer = nameImporter;
-            exporter = nameExporter;
-            carrier = nameCarrier;
-            PortLoading = namePortLoading;
-            PortDischarge = namePortDischarge;
-            uint dateLoading = now;
-            uint _lateDays;
-            }
+    uint public valueCargo;
+    address public importer;
+    address public exporter;
+    address public carrier;
+    string public portLoading;
+    string public portDischarge;
+    string public incoterms;
+    Container public containerCargo;
     
-    function conteiner (uint numberSerial, string memory contentDescription, uint weight, uint volume) public {
+    struct Container {
+        uint serialNumber;
+        string contentDescription;
+        uint weight;
+        uint volume;
     }
     
-    function paymentCargo (uint valueCargo, address payable walletExporter) public payable {
+    constructor (
+        uint _valueCargo,
+        address _importer,
+        address _exporter,
+        address _carrier,
+        string memory _portLoading,
+        string memory _portDischarge
+        ) public {
+        valueCargo = _valueCargo;
+        importer = _importer;
+        exporter = _exporter;
+        carrier = _carrier;
+        portLoading = _portLoading;
+        portDischarge = _portDischarge;
+    }
+    
+    function setContainer (uint _serialNumber, string memory _contentDescription, uint _weight, uint _volume)
+    public {
+        containerCargo = Container (_serialNumber, _contentDescription, _weight, _volume);
+    }
+    
+    function paymentCargo (address payable walletExporter) public payable {
         walletExporter.transfer(valueCargo);
     }
     
     // Demurrage, ou sobrestadia, é a indenização diária, devida ao transportador, quando o importador permanece em posse do contêiner por um período superior ao tempo acordado.
-    function simulaDemurrage (uint _lateDays, uint valueCargo) public view returns (uint priceDemurrage) {
+    function simulaDemurrage (uint _lateDays) public view returns (uint priceDemurrage) {
         priceDemurrage = ((valueCargo*2)/100)*_lateDays;
         return priceDemurrage;
     }
@@ -54,8 +60,8 @@ contract BillOfLanding {
     
     //A responsabilidade pela contratação do seguro é estabelecida entre as partes no contrato comercial de compra e venda da carga e utiliza-se os INCOTERMS
     //(International Commercial Terms – Câmara Internacional do Comércio) para definir qual será a parte que suportará os riscos do transporte marítimo.
-    function store(string memory incoterms) public {
-    
-        
-    }    
+    function setIncoterms (string memory _inconterms) public {
+        incoterms = _inconterms;
+    }
+ 
 }
